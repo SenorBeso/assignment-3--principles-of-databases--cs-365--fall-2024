@@ -18,7 +18,7 @@ function insertEntry($pdo, $data) {
             ':comment' => $data['comment']
         ]);
         $account_id = $pdo->lastInsertId();
-        $stmt = $pdo->prepare("INSERT INTO register (website_id, account_id) VALUES (:website_id, :account_id)");
+        $stmt = $pdo->prepare("INSERT INTO register_for (website_id, account_id) VALUES (:website_id, :account_id)");
         $stmt->execute([
             ':website_id' => $website_id,
             ':account_id' => $account_id
@@ -41,7 +41,7 @@ function search($pdo, $query) {
                 a.username,
                 a.comment
             FROM
-                register r
+                register_for r
             INNER JOIN
                 website w ON r.website_id = w.id
             INNER JOIN

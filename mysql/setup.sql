@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS student_passwords;
 CREATE DATABASE student_passwords DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 USE student_passwords;
-CREATE USER 'passwords_user'@'localhost' IDENTIFIED BY '';
+CREATE USER IF NOT EXISTS 'passwords_user'@'localhost' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON student_passwords.* TO 'passwords_user'@'localhost';
 
 -- Website table entity
@@ -23,7 +23,7 @@ CREATE TABLE account_info (
 );
 
 -- Register relation table to link the entities for ER diagram
-CREATE TABLE register (
+CREATE TABLE register_for (
     id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,
     website_id INT NOT NULL,
@@ -36,7 +36,8 @@ CREATE TABLE register (
 INSERT INTO website (website_name, site_url) VALUES ('example site', 'https://www.test.com');
 
 -- initializing data
-INSERT INTO account_info (first_name,last_name, email, username, password, comment) VALUES ('aiden', 'kiss', 'test@example.com', 'testuser', 'password', 'Test account');
+INSERT INTO account_info (first_name,last_name, email, username, password, comment)
+VALUES ('aiden', 'kiss', 'test@example.com', 'testuser', 'password', 'Test account');
 
 -- initializing data
-INSERT INTO register (account_id, website_id) VALUES (LAST_INSERT_ID(), LAST_INSERT_ID());
+INSERT INTO register_for (account_id, website_id) VALUES (LAST_INSERT_ID(), LAST_INSERT_ID());
