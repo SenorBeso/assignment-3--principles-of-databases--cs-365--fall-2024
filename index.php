@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = $_POST['search_query'] ?? '';
             if ($query !== '') {
                 $results = search($db, $query);
-                include "php/templates/search-results.php";
             } else {
                 echo "<p>Please enter a search query.</p>";
             }
@@ -20,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'website_name' => $_POST['website_name'],
                 'site_url' => $_POST['site_url'],
+                'first_name' => $_POST['first_name'],
+                'last_name' => $_POST['last_name'],
                 'email' => $_POST['email'],
                 'username' => $_POST['username'],
                 'password' => $_POST['password'],
@@ -50,16 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD Operations</title>
+    <title>Assignment 3</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <h1>Manage Passwords</h1>
-    <!-- Insert Form -->
     <form method="POST">
         <input type="hidden" name="action" value="insert">
         <input type="text" name="website_name" placeholder="Website Name" required>
         <input type="url" name="site_url" placeholder="URL" required>
+        <input type="first_name" name="first_name" placeholder="First Name" required>
+        <input type="last_name" name="last_name" placeholder="Last Name" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
@@ -69,10 +71,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </head>
   <body>
     <header>
-      <h2>CRUD Operations via a Web Interface</h2>
+      <h2>Clear Button</h2>
     </header>
     <form id="clear-results" method="post"
           action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <input id="clear-results__submit-button" type="submit" value="Clear Results">
     </form>
+    <body>
+    <h3>Search</h3>
+    <form method="POST">
+        <input type="hidden" name="action" value="search">
+        <label for="search_query">Search:</label>
+        <input type="text" id="search_query" name="search_query" placeholder="Search by name, email, username, etc." required>
+        <button type="submit">Search</button>
+    </form>
+</body>
 </html>

@@ -14,6 +14,8 @@ CREATE TABLE website (
 -- Account table entity
 CREATE TABLE account_info (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -27,14 +29,14 @@ CREATE TABLE register (
     website_id INT NOT NULL,
     FOREIGN KEY (account_id) REFERENCES account_info(id) ON DELETE CASCADE,
     FOREIGN KEY (website_id) REFERENCES website(id) ON DELETE CASCADE,
-    UNIQUE(account_id, website_id) -- Ensure each account can only have one entry for a given website
+    UNIQUE(account_id, website_id)
 );
 
 -- Initializing Data
-INSERT INTO website (website_name, site_url) VALUES ('Example Website', 'https://www.example.com');
+INSERT INTO website (website_name, site_url) VALUES ('example site', 'https://www.test.com');
 
 -- initializing data
-INSERT INTO account_info (email, username, password, comment) VALUES ('test@example.com', 'testuser', 'password123', 'Test account');
+INSERT INTO account_info (first_name,last_name, email, username, password, comment) VALUES ('aiden', 'kiss', 'test@example.com', 'testuser', 'password', 'Test account');
 
---initializing data
+-- initializing data
 INSERT INTO register (account_id, website_id) VALUES (LAST_INSERT_ID(), LAST_INSERT_ID());
