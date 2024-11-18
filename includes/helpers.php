@@ -39,6 +39,7 @@ function search($pdo, $query) {
                 a.last_name,
                 a.email,
                 a.username,
+                a.password,
                 a.comment
             FROM
                 register_for r
@@ -53,6 +54,7 @@ function search($pdo, $query) {
                 a.last_name LIKE :query OR
                 a.email LIKE :query OR
                 a.username LIKE :query OR
+                a.password LIKE :query OR
                 a.comment LIKE :query
         ");
 
@@ -70,6 +72,7 @@ function search($pdo, $query) {
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Username</th>
+                    <th>Password</th>
                     <th>Comment</th>
                   </tr>";
 
@@ -81,6 +84,7 @@ function search($pdo, $query) {
                 echo "<td>" . htmlspecialchars($row['last_name']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['password']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['comment']) . "</td>";
                 echo "</tr>";
             }
