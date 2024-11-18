@@ -95,4 +95,15 @@ function search($pdo, $query) {
         echo "<p>Error during search: " . $e->getMessage() . "</p>";
     }
 }
-?>
+
+ function updateEntry($pdo, $column, $pattern, $new_value) {
+     if ($column == 'username' || $column == 'email') {
+         $stmt = $pdo->prepare("UPDATE account_info SET $column = :new_value WHERE $column LIKE :pattern");
+         $stmt->execute([':new_value' => $new_value, ':pattern' => "%$pattern%"]);
+     }
+     elseif ($column == 'website_name' || $column == 'site_url') {
+         $stmt = $pdo->prepare("UPDATE website SET $column = :new_value WHERE $column LIKE :pattern");
+         $stmt->execute([':new_value' => $new_value, ':pattern' => "%$pattern%"]);
+     }
+ }
+

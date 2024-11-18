@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input id="clear-results__submit-button" type="submit" value="Clear Results">
 </form>
 <body>
-<h3>Search</h3>
+<h2>Search</h2>
 <form method="POST">
     <input type="hidden" name="action" value="search">
     <label for="search_query">Search:</label>
@@ -84,4 +84,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <button type="submit">Search</button>
 </form>
 </body>
+<h2>Update</h2>
+<form method="POST">
+    <input type="hidden" name="action" value="update">
+    <label for="attribute-select">Choose an attribute:</label>
+    <select name="column" id="attribute-select">
+        <option value="website_name">Website Name</option>
+        <option value="site_url">URL</option>
+        <option value="first_name">First Name</option>
+        <option value="last_name">Last Name</option>
+        <option value="email">Email</option>
+        <option value="username">Username</option>
+        <option value="password">Password</option>
+    </select>
+    <input type="text" name="pattern" placeholder="Pattern to match" required>
+    <input type="text" name="new_value" placeholder="New value" required>
+    <button type="submit">Update</button>
+</form>
 </html>
