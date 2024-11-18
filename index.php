@@ -96,9 +96,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <option value="email">Email</option>
         <option value="username">Username</option>
         <option value="password">Password</option>
+        <option value="comment">Comment</option>
     </select>
-    <input type="text" name="pattern" placeholder="Pattern to match" required>
-    <input type="text" name="new_value" placeholder="New value" required>
+    <label>
+        <input type="text" name="pattern" placeholder="Pattern to match" required>
+    </label>
+    <label>
+        <input type="text" name="new_value" placeholder="New value" required>
+    </label>
     <button type="submit">Update</button>
 </form>
+<h2>Delete</h2>
+<form method="POST">
+    <input type="hidden" name="action" value="delete">
+    <label for="attribute-select">Choose an attribute:</label>
+    <select name="column" id="attribute-select">
+        <option value="website_name">Website Name</option>
+        <option value="site_url">URL</option>
+        <option value="first_name">First Name</option>
+        <option value="last_name">Last Name</option>
+        <option value="email">Email</option>
+        <option value="username">Username</option>
+        <option value="password">Password</option>
+        <option value="comment">Comment</option>
+
+    </select>
+    <input type="text" name="pattern" placeholder="Pattern to match" required>
+    <button type="submit">Delete</button>
+</form>
+</body>
 </html>

@@ -97,7 +97,7 @@ function search($pdo, $query) {
 }
 
  function updateEntry($pdo, $column, $pattern, $new_value) {
-     if ($column == 'username' || $column == 'email') {
+     if ($column == 'username' || $column == 'email' || $column == 'first_name' || $column == 'last_name' || $column == 'password' || $column == 'comment') {
          $stmt = $pdo->prepare("UPDATE account_info SET $column = :new_value WHERE $column LIKE :pattern");
          $stmt->execute([':new_value' => $new_value, ':pattern' => "%$pattern%"]);
      }
@@ -107,3 +107,13 @@ function search($pdo, $query) {
      }
  }
 
+ function deleteEntry($pdo, $column, $pattern) {
+     if ($column == 'username' || $column == 'email' || $column == 'first_name' || $column == 'last_name' || $column == 'password' || $column == 'comment') {
+         $stmt = $pdo->prepare("DELETE FROM account_info WHERE $column LIKE :pattern");
+         $stmt->execute([':pattern' => "%$pattern%"]);
+     }
+     elseif ($column == 'website_name' || $column == 'site_url') {
+         $stmt = $pdo->prepare("DELETE FROM website WHERE $column LIKE :pattern");
+         $stmt->execute([':pattern' => "%$pattern%"]);
+     }
+ }
