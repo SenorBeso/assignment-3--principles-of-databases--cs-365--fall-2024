@@ -66,4 +66,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <textarea name="comment" placeholder="Comment"></textarea>
         <button type="submit">Insert</button>
     </form>
+    </head>
+  <body>
+    <header>
+      <h2>CRUD Operations via a Web Interface</h2>
+    </header>
+    <form id="clear-results" method="post"
+          action="<?php echo $_SERVER['PHP_SELF']; ?>">
+      <input id="clear-results__submit-button" type="submit" value="Clear Results">
+    </form>
 </html>
