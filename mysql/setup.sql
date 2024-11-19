@@ -18,11 +18,11 @@ CREATE TABLE account_info (
     last_name VARCHAR(64) NOT NULL,
     email VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    password VARBINARY(255) NOT NULL,
     comment TEXT
 );
 
--- Register relation table to link the entities for ER diagram
+-- Register_for relation table to link the entities for ER diagram
 CREATE TABLE register_for (
     id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,

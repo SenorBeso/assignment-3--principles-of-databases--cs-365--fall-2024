@@ -1,14 +1,20 @@
 <?php
 function insertEntry($pdo, $data) {
     try {
+        // Insert into the 'website' table
         $stmt = $pdo->prepare("INSERT INTO website (website_name, site_url) VALUES (:website_name, :site_url)");
         $stmt->execute([
             ':website_name' => $data['website_name'],
             ':site_url' => $data['site_url']
         ]);
         $website_id = $pdo->lastInsertId();
-        $stmt = $pdo->prepare("INSERT INTO account_info (first_name, last_name, email, username, password, comment)
-         VALUES (:first_name, :last_name, :email, :username, :password, :comment)");
+
+        $stmt = $pdo->prepare("
+            INSERT INTO account_info (first_name, last_name, email, username, password, comment)
+            VALUES (:first_name, :last_name, :email, :username,
+                    AES_ENCRYPT(:password, @key_str, @init_vector),
+                    :comment)
+        ");
         $stmt->execute([
             ':first_name' => $data['first_name'],
             ':last_name' => $data['last_name'],
@@ -18,11 +24,13 @@ function insertEntry($pdo, $data) {
             ':comment' => $data['comment']
         ]);
         $account_id = $pdo->lastInsertId();
+
         $stmt = $pdo->prepare("INSERT INTO register_for (website_id, account_id) VALUES (:website_id, :account_id)");
         $stmt->execute([
             ':website_id' => $website_id,
             ':account_id' => $account_id
         ]);
+
         echo "Website and account successfully added.";
     } catch (PDOException $e) {
         echo "Error inserting data: " . $e->getMessage();
@@ -39,7 +47,7 @@ function search($pdo, $query) {
                 a.last_name,
                 a.email,
                 a.username,
-                a.password,
+                CAST(AES_DECRYPT(a.password, @key_str, @init_vector) AS CHAR) AS password,
                 a.comment
             FROM
                 register_for r
@@ -54,10 +62,8 @@ function search($pdo, $query) {
                 a.last_name LIKE :query OR
                 a.email LIKE :query OR
                 a.username LIKE :query OR
-                a.password LIKE :query OR
                 a.comment LIKE :query
         ");
-
         $stmt->execute([':query' => '%' . $query . '%']);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -88,7 +94,6 @@ function search($pdo, $query) {
                 echo "<td>" . htmlspecialchars($row['comment']) . "</td>";
                 echo "</tr>";
             }
-
             echo "</table>";
         }
     } catch (PDOException $e) {
