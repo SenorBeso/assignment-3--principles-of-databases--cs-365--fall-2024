@@ -31,7 +31,6 @@ function insertEntry($pdo, $data) {
             ':account_id' => $account_id
         ]);
 
-        echo "Website and account successfully added.";
     } catch (PDOException $e) {
         echo "Error inserting data: " . $e->getMessage();
     }

@@ -32,13 +32,3 @@ CREATE TABLE register_for (
     FOREIGN KEY (website_id) REFERENCES website(id) ON DELETE CASCADE,
     UNIQUE(account_id, website_id)
 );
-
--- Initializing Data
-INSERT INTO website (website_name, site_url) VALUES ('example site', 'https://www.test.com');
-
--- initializing data
-INSERT INTO account_info (first_name,last_name, email, username, password, comment)
-VALUES ('aiden', 'kiss', 'test@example.com', 'testuser', 'password', 'Test account');
-
--- initializing data
-INSERT INTO register_for (account_id, website_id) VALUES (LAST_INSERT_ID(), LAST_INSERT_ID());

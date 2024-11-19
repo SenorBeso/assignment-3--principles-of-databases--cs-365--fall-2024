@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = $_POST['search_query'] ?? '';
             if ($query !== '') {
                 $results = search($db, $query);
-            } else {
-                echo "<p>Please enter a search query.</p>";
             }
             break;
 
@@ -28,17 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'comment' => $_POST['comment'],
             ];
             insertEntry($db, $data);
-            echo "<p>Entry inserted successfully!</p>";
+            echo "<p>Entry inserted into the password manager</p>";
             break;
 
         case 'update':
             updateEntry($db, $_POST['column'], $_POST['pattern'], $_POST['new_value']);
-            echo "<p>Entry updated successfully!</p>";
+            echo "<p>Entry updated</p>";
             break;
 
         case 'delete':
             deleteEntry($db, $_POST['column'], $_POST['pattern']);
-            echo "<p>Entry deleted successfully!</p>";
+            echo "<p>Entry deleted</p>";
             break;
     }
 }
