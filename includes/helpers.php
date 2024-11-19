@@ -48,6 +48,7 @@ function search($pdo, $query) {
                 a.email,
                 a.username,
                 CAST(AES_DECRYPT(a.password, @key_str, @init_vector) AS CHAR) AS password,
+                r.registered_at,
                 a.comment
             FROM
                 register_for r
@@ -70,7 +71,7 @@ function search($pdo, $query) {
         if (empty($results)) {
             echo "<p>No results found for '$query'.</p>";
         } else {
-            echo "<table border='1'>";
+            echo "<table ='1'>";
             echo "<tr>
                     <th>Website Name</th>
                     <th>Website URL</th>
@@ -79,6 +80,7 @@ function search($pdo, $query) {
                     <th>Email</th>
                     <th>Username</th>
                     <th>Password</th>
+                    <th>Registered At</th>
                     <th>Comment</th>
                   </tr>";
 
@@ -91,6 +93,7 @@ function search($pdo, $query) {
                 echo "<td>" . htmlspecialchars($row['email']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['username']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['password']) . "</td>";
+                echo "<td>" . htmlspecialchars($row['registered_at']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['comment']) . "</td>";
                 echo "</tr>";
             }

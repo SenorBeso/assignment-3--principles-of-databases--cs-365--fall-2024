@@ -27,6 +27,7 @@ CREATE TABLE register_for (
     id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,
     website_id INT NOT NULL,
+    registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (account_id) REFERENCES account_info(id) ON DELETE CASCADE,
     FOREIGN KEY (website_id) REFERENCES website(id) ON DELETE CASCADE,
     UNIQUE(account_id, website_id)
