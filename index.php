@@ -117,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <option value="username">Username</option>
         <option value="password">Password</option>
         <option value="comment">Comment</option>
-
     </select>
     <input type="text" name="pattern" placeholder="Pattern to match" required>
     <button type="submit">Delete</button>

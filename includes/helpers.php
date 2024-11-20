@@ -32,7 +32,7 @@ function insertEntry($pdo, $data) {
         ]);
 
     } catch (PDOException $e) {
-        echo "Error inserting data: " . $e->getMessage();
+        echo "Insert Failed" . $e->getMessage();
     }
 }
 

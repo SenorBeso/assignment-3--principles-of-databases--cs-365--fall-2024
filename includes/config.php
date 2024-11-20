@@ -17,7 +17,7 @@ try {
     );
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Set encryption parameters
+//For encrypt/decrypt
     $db->exec("SET block_encryption_mode = 'aes-256-cbc'");
     $db->exec("SET @key_str = UNHEX(SHA2('" . key_str . "', 256))");
     $db->exec("SET @init_vector = '" . initvector . "'");
